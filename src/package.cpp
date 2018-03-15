@@ -20,6 +20,12 @@ int Package::getLatenza(Country *c) const{
 	return this->r->getLatenza(c);
 }
 
+
 float Package::getCost() const{
 	return this->cost;
 }
+
+map<int, Service_quant> Package::getServ() const {
+    return this->ss;
+}
+
