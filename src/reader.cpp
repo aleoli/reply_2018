@@ -16,14 +16,6 @@ Reader::Reader(string file_name) {
 	f >> nProv >> nSer >> nCou >> nProj;
     
 	while(true) {
-/*		Ride r;
-		r.id = id;
-		if(!(f >> r.start.x >> r.start.y >> r.end.x >> r.end.y >> r.st_t >> r.end_t)) {
-			break;
-		}
-		cout << r.start.x << " " << r.start.y << " " << r.end.x << " " << r.end.y << " " << r.st_t << " " << r.end_t << endl;
-		this->mRides.push_back(r);
-		id++;*/
         string tmp;
         int tmp1;
         

@@ -21,14 +21,15 @@ namespace reply {
 	
 	public:
     Reader(string);
-    map<> GetMap();
-    vector<Ride> GetRides();
-		int,*Ser
+    map<int,Service*> get_services();
+    map<int,Country*> get_countries();
+    map<int,Provider*> get_providers();
+    map<int,Project*> get_projects();
     private:
-	Map<int,*Service> mServices;
-    Map<int,*Country> mCountries;
-    Map<int,*Provider> mProviders;
-    Map<signed long,*Project> mProjects;
+	map<int,Service*> mServices;
+    map<int,Country*> mCountries;
+    map<int,Provider*> mProviders;
+    map<unsigned long,*Project> mProjects;
 	};
 	
 }
