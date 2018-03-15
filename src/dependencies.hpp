@@ -11,7 +11,21 @@ using std::endl;
 
 namespace reply {
     
+    class Provider;
+    class Service;
+    class Country;
+    class Project;
+    class Region;
     
+    typedef struct {
+        Country *c;
+        int latency;
+    } Country_latency;
+    
+    typedef struct {
+        Service *s;
+        int q;
+    } Service_quant;
     
 }
 

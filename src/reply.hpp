@@ -3,4 +3,9 @@
 
 #include "dependencies.hpp"
 
+#include "country.hpp"
+#include "region.hpp"
+#include "service.hpp"
+#include "project.hpp"
+
 #endif
