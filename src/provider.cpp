@@ -21,7 +21,7 @@ Qualcosa Provider::getQualcosa(Country* country, vector<Service*> unita){
 		r = it->second;
 		
 		//verifico se ci sono ancora pacchetti
-		if(verificaNumPacchetti(r->package) == 0) continue;
+		if(r->package->getNum() == 0) continue;
 		
 		//
 	}
