@@ -1,6 +1,9 @@
 #include "provider.hpp"
 using reply::Provider;
 
+#include "region.hpp"
+#include "package.hpp"
+
 Provider::Provider(int id, string name){
 	this->id = id;
 	this->name = name;
@@ -12,7 +15,7 @@ Provider::~Provider(){
 }
 
 void Provider::addRegion(Region *r){
-	regioni[c->id] = r;
+	regioni[r->getId()] = r;
 }
 
 Qualcosa Provider::getQualcosa(Country* country, vector<Service*> unita){
@@ -21,7 +24,7 @@ Qualcosa Provider::getQualcosa(Country* country, vector<Service*> unita){
 		r = it->second;
 		
 		//verifico se ci sono ancora pacchetti
-		if(r->package->getNum() == 0) continue;
+		if(r->getPackage()->getNum() == 0) continue;
 		
 		//
 	}

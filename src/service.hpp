@@ -17,7 +17,7 @@ namespace reply {
         int id;
         string name;
         
-    }
+    };
     
 }
 

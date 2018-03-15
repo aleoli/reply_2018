@@ -10,6 +10,9 @@ namespace reply {
     public:
         Region(int id, string name);
         
+        int getId() const;
+        Package *getPackage() const;
+        
         void add_country(Country_latency c_l);
         void add_package(Package *p);
         
@@ -19,7 +22,7 @@ namespace reply {
         map<int, Country_latency> cls;
         Package *package;
         
-    }
+    };
     
 }
 

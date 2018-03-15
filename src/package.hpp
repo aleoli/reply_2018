@@ -10,12 +10,14 @@ namespace reply {
     public:
         Package(int id, int n_u, float cost);
         
+        int getNum() const;
+        
     private:
         int id;
         int n_u;
         float cost;
         
-    }
+    };
     
 }
 

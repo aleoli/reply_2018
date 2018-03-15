@@ -2,11 +2,11 @@
 using reply::Package;
 
 Package::Package(int id, int n_u, float cost) {
-    this->id;
-    this->n_u;
+    this->id = id;
+    this->n_u = n_u;
     this->cost = cost;
 }
 
-Package::getNum(){
+int Package::getNum() const {
 	return this->n_u;
 }

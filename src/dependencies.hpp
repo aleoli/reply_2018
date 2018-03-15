@@ -3,11 +3,13 @@
 
 #include <iostream>
 #include <vector>
+#include <map>
 
 using std::vector;
 using std::string;
 using std::cout;
 using std::endl;
+using std::map;
 
 namespace reply {
     

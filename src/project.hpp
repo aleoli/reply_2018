@@ -18,7 +18,7 @@ namespace reply {
         Country *c;
         map<int, Service_quant> sqs;
         
-    }
+    };
     
 }
 

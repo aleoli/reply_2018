@@ -13,3 +13,11 @@ void Region::add_country(Country_latency c_l) {
 void Region::add_package(Package *p) {
     this->package = p;
 }
+
+int Region::getId() const {
+    return this->id;
+}
+
+Package *Region::getPackage() const {
+    return this->package;
+}
