@@ -2,6 +2,7 @@
 using reply::Project;
 
 #include "service.hpp"
+#include "package.hpp"
 
 Project::Project(int id, unsigned long penalty, Country *c) {
     this->id = id;
