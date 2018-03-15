@@ -2,13 +2,13 @@
 
 using hs::Output;
 
-Output::Output(map<int,Project*> mProjects){
+Output::Output(vector<Package_quant> mProjects){
     
     FILE* f;
     f=fopen("output.txt","w");
     
     for(int i=0;i<mProjects.size();i++) {
-        for(int j=0;j<mProjects[i]->;j++)
+        fprintf(f,"%d ",&mProjects[i].q);
     }
     fclose(f);
 }
