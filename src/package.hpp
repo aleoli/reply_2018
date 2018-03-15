@@ -21,6 +21,7 @@ namespace reply {
         float cost;
         map<int, Service_quant> ss;
 		Region *r;
+        vector<Package *> bought;
         
     };
     

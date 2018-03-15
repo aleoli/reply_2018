@@ -33,5 +33,20 @@ void Project::buy_res(map<int, Provider *> *provs) {
 }
 
 void Project::scale_res(Package *p) {
-    
+    this->bought.push_back(p);
+    map<int, Service_quant> ss = p->getServ();
+    bool finish = true;
+    for(auto it=ss.begin(); it!=ss.end(); ++it) {
+        this->sqs[it->second->s->getId()] -= it->second->q;
+        if(this->sqs[it->second->s->getId()] > 0) {
+            finish = false;
+        }
+    }
+    if(finish) {
+        this->has_req = false;
+    }
+}
+
+vector<Package *> Project::getBought() const {
+    return this->bought;
 }
