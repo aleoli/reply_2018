@@ -16,7 +16,7 @@ namespace reply {
     class Output {
 	
         public:
-        Output(vector<Package_quant> mProjects);
+        Output(map<unsigned int,Project*> mProjects);
     };
 	
 }
