@@ -17,7 +17,7 @@ namespace reply {
         int id;
         string name;
         map<int, Country_latency> cls;
-        vector<Package *> packages;
+        Package *package;
         
     }
     

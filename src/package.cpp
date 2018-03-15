@@ -6,3 +6,7 @@ Package::Package(int id, int n_u, float cost) {
     this->n_u;
     this->cost = cost;
 }
+
+Package::getNum(){
+	return this->n_u;
+}
