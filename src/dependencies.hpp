@@ -37,6 +37,11 @@ namespace reply {
         float cost;
     } Pack;
     
+    typedef struct {
+        Package *p;
+        int q;
+    } Package_quant;
+    
 }
 
 #endif

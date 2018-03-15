@@ -16,6 +16,7 @@ void Project::add_service(Service_quant sq) {
 }
 
 void Project::buy_res(map<int, Provider *> *provs) {
+    this->n_provs = provs.size();
     while(this->has_req) {
         Pack best;
         bool has_best = false;
@@ -47,6 +48,13 @@ void Project::scale_res(Package *p) {
     }
 }
 
-vector<Package *> Project::getBought() const {
-    return this->bought;
+int **Project::getBought(int *w, int *h) {
+    h = this->n_provs;
+    w = this->ss.size();
+    int **m = malloc();
+    for(int a=0; a<h; a++) {
+        for(int b=0; b<w; b++) {
+            
+        }
+    }
 }
