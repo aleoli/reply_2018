@@ -10,5 +10,6 @@
 #include "package.hpp"
 #include "provider.hpp"
 #include "reader.hpp"
+#include "output.hpp"
 
 #endif

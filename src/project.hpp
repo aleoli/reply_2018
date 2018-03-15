@@ -13,7 +13,7 @@ namespace reply {
         void add_service(Service_quant s_q);
         void buy_res(map<int, Provider *> *provs);
         void scale_res(Package *p);
-        vector<Package_quant> getBought(int *w, int *h);
+        vector<Package_quant> getBought();
         
     private:
         int id;
