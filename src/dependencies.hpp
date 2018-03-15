@@ -31,6 +31,12 @@ namespace reply {
         int q;
     } Service_quant;
     
+    typedef struct {
+        Package *p;
+        int lat;
+        float cost;
+    } Pack;
+    
 }
 
 #endif
