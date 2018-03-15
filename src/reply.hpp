@@ -7,5 +7,8 @@
 #include "region.hpp"
 #include "service.hpp"
 #include "project.hpp"
+#include "package.hpp"
+#include "provider.hpp"
+#include "reader.hpp"
 
 #endif
