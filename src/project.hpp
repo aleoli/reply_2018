@@ -11,6 +11,7 @@ namespace reply {
         Project(int id, unsigned long penalty, Country *c);
         
         void add_service(Service_quant s_q);
+        void buy_res(map<int, Provider *> *provs);
         
     private:
         int id;

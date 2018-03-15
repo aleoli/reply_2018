@@ -7,6 +7,10 @@ Package::Package(int id, int n_u, float cost) {
     this->cost = cost;
 }
 
+void Package::add_service(Service_quant s) {
+    this->ss[s.s->getId()] = s;
+}
+
 int Package::getNum() const {
 	return this->n_u;
 }

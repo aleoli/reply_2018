@@ -10,12 +10,14 @@ namespace reply {
     public:
         Package(int id, int n_u, float cost);
         
+        void add_service(Service_quant s);
         int getNum() const;
         
     private:
         int id;
         int n_u;
         float cost;
+        map<int, Service_quant> ss;
         
     };
     
