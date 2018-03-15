@@ -12,7 +12,7 @@ namespace reply {
         
         int getId() const;
         Package *getPackage() const;
-        
+		int getLatenza(Country *c);        
         void add_country(Country_latency c_l);
         void add_package(Package *p);
         

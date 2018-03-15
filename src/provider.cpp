@@ -18,13 +18,17 @@ void Provider::addRegion(Region *r){
 	regioni[r->getId()] = r;
 }
 
-Qualcosa Provider::getQualcosa(Country* country, vector<Service*> unita){
+Package *Provider::getPackage(Country* country, map<int, Service_quant> serv){
 	Region *r;
 	for(auto it=this->regioni.begin(); it!=this->regioni.end();++it){
 		r = it->second;
 		
 		//verifico se ci sono ancora pacchetti
 		if(r->getPackage()->getNum() == 0) continue;
+		
+		
+		
+		
 		
 		
 		

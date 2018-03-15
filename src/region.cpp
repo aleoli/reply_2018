@@ -21,3 +21,11 @@ int Region::getId() const {
 Package *Region::getPackage() const {
     return this->package;
 }
+
+int Region::getLatenza(Country *c){
+	Country_latency cl;
+	for(auto it=this->cls.begin(); it!=this->cls.end();++it){
+		cl = it->second;
+		if(cl.c == c) return cl.latency;
+	}
+}

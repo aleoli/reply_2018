@@ -46,7 +46,7 @@ Reader::Reader(string file_name) {
 			f >> nomereg;
 			f >> available >> package_unit_cost;                 
 			Region* reg=new Region(count1,nomereg);
-			Package* p= new Package(count1,available,package_unit_cost);
+			Package* p= new Package(count1,available,package_unit_cost, reg);
 			for(int count3; count3<nSer; count3++){
 				Service_quant sq;
 				int q;
