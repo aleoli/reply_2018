@@ -13,6 +13,7 @@ namespace reply {
         void add_service(Service_quant s_q);
         void buy_res(map<int, Provider *> *provs);
         void scale_res(Package *p);
+        int **getBought(int *w, int *h);
         
     private:
         int id;
@@ -20,6 +21,7 @@ namespace reply {
         Country *c;
         map<int, Service_quant> sqs;
         bool has_req;
+        int n_provs;
         
     };
     

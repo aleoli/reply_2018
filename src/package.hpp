@@ -12,7 +12,9 @@ namespace reply {
         
         void add_service(Service_quant s);
         int getNum() const;
-		int getLatenza(Country *c);
+
+		float getCost() const;
+		int getLatenza(Country *c) const;
         map<int, Service_quant> getServ() const;
         
     private:
@@ -21,6 +23,7 @@ namespace reply {
         float cost;
         map<int, Service_quant> ss;
 		Region *r;
+        vector<Package *> bought;
         
     };
     

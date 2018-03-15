@@ -16,6 +16,7 @@ void Project::add_service(Service_quant sq) {
 }
 
 void Project::buy_res(map<int, Provider *> *provs) {
+    this->n_provs = provs.size();
     while(this->has_req) {
         Pack best;
         bool has_best = false;
@@ -33,5 +34,27 @@ void Project::buy_res(map<int, Provider *> *provs) {
 }
 
 void Project::scale_res(Package *p) {
-    
+    this->bought.push_back(p);
+    map<int, Service_quant> ss = p->getServ();
+    bool finish = true;
+    for(auto it=ss.begin(); it!=ss.end(); ++it) {
+        this->sqs[it->second->s->getId()] -= it->second->q;
+        if(this->sqs[it->second->s->getId()] > 0) {
+            finish = false;
+        }
+    }
+    if(finish) {
+        this->has_req = false;
+    }
+}
+
+int **Project::getBought(int *w, int *h) {
+    h = this->n_provs;
+    w = this->ss.size();
+    int **m = malloc();
+    for(int a=0; a<h; a++) {
+        for(int b=0; b<w; b++) {
+            
+        }
+    }
 }
