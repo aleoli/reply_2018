@@ -11,19 +11,19 @@ using std::endl;
 using std::vector;
 using std::string;
 
-using hs::Service;
-using hs::Country;
-using hs::Provider;
+using reply::Service;
+using reply::Country;
+using reply::Provider;
 
-namespace hs {
+namespace reply {
 	
 	class Reader {
 	
 	public:
     Reader(string);
-    MapConfig GetMap();
+    map<> GetMap();
     vector<Ride> GetRides();
-		
+		int,*Ser
     private:
 	Map<int,*Service> mServices;
     Map<int,*Country> mCountries;

@@ -1,5 +1,5 @@
 #include "reader.hpp"
-using hs::Reader;
+using reply::Reader;
 
 #include <fstream>
 
@@ -32,7 +32,7 @@ Reader::Reader(string file_name) {
             mServices[count]=new Service(count,tmp);
         }
         
-        for(int count=0; count<nSer; count++){
+        for(int count=0; count<nCou; count++){
             f >> tmp;
             mCountries[count]=new Country(count,tmp);
         }
@@ -46,18 +46,23 @@ Reader::Reader(string file_name) {
                 float package_unit_cost;
                 f >> nomereg;
                 f >> available >> package_unit_cost;                 Region* reg=new Region(count1,nomereg);
+                Package* p= new Package(count1,available,package_unit_cost);
                 for(int count3; count3<nSer; count3++){
-                    int unit_of_service;
-                    f >> unit_of_service;
-                    Package* pac=new Package(count3,unit_of_service,package_unit_cost;
-                    reg->addPackage(pac);   
-                }                                             
+                    Service_Quant sq;
+                    int q;
+                    sq.s= mServices[count3];
+                    f >> q;
+                    sq.q= q;
+                    p->add_service(sq);
+                }
+                reg->add_package(p);
                 for(int count2; count2<nCou; count2++){
                     int latency;
                     Country_Latency cl;
                     cl.c=mCountries[count2];
                     f >> latency;
                     cl.latency=latency;
+                    reg->add_country(cl);
                 }
                 mProviders[count]->addRegion(reg);
             }
