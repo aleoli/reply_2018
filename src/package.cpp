@@ -29,3 +29,7 @@ map<int, Service_quant> Package::getServ() const {
     return this->ss;
 }
 
+int Package::getId(){
+	return this->id;
+}
+
