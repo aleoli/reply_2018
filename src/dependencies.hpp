@@ -20,6 +20,7 @@ namespace reply {
     class Region;
     class Reader;
     class Package;
+    class Output;
     
     typedef struct {
         Country *c;

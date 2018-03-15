@@ -1,4 +1,4 @@
-OBJECTS = bin/main.o bin/reply.o bin/dependencies.o bin/country.o bin/package.o bin/project.o bin/provider.o bin/reader.o bin/region.o bin/service.o
+OBJECTS = bin/main.o bin/reply.o bin/dependencies.o bin/country.o bin/package.o bin/project.o bin/provider.o bin/reader.o bin/region.o bin/service.o bin/output.o
 
 CC = g++
 

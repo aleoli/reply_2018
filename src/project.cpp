@@ -56,7 +56,7 @@ void Project::scale_res(Package *p) {
     }
 }
 
-vector<Package_quant> Project::getBought(int *w, int *h) {
+vector<Package_quant> Project::getBought() {
     vector<Package_quant> res;
     for(auto it=this->bought.begin(); it!=this->bought.end(); ++it) {
         res.push_back(it->second);

@@ -17,5 +17,7 @@ int main(int argc, char *argv[]) {
         it->second->buy_res(&provs);
     }
     
+    Output o(projects);
+    
     return 0;
 }
