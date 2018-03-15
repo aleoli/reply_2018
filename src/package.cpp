@@ -20,3 +20,7 @@ int Package::getLatenza(Country *c){
 	return this->r->getLatenza(c);
 }
 
+map<int, Service_quant> Package::getServ() const {
+    return this->ss;
+}
+
