@@ -12,7 +12,7 @@ namespace reply {
 			void addRegion(Region*);
 			void addNumRegion(int);
 			~Provider();
-			Qualcosa getQualcosa(Country, vector<Service*>);
+			Qualcosa getPackage(Country, map<int, Service_quant>);
 		
 		private:
 			int id;
