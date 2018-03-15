@@ -18,28 +18,33 @@ void Provider::addRegion(Region *r){
 	regioni[r->getId()] = r;
 }
 
-Package *Provider::getPackage(Country* country, map<int, Service_quant> serv){
+Pack Provider::getPackage(Country* country, map<int, Service_quant> serv){
 	Region *r;
-	Package *p=NULL;
-	Package *ptemp=NULL;
+	Pack ptemp;
+	Pack pack;
+	Package *p;
 	float latcost=-1;
+	float ltemp;
 
 	for(auto it=this->regioni.begin(); it!=this->regioni.end();++it){
 		r = it->second;
 		
-		ptemp = r->getPackage();
+		p = r->getPackage();
 		//verifico se ci sono ancora pacchetti
-		if(ptemp->getNum() == 0) continue;
+		if(p->getNum() == 0) continue;
 		
-		prod = ptemp->getLatenza()*ptemp->getCost();
+		ptemp.lat = p->getLatenza();
+		ptemp.cost = p->getCost();
 		
-		if(latcost==-1 || prod<latcost) {
-			latcost = prod;
-			p = ptemp;
+		ltemp = ptemp.lat*ptemp.cost;
+		
+		if(latcost==-1 || ltemp<latcost) {
+			latcost = ltemp;
+			pack = ptemp;
 		}		
 
 		//
 	}
 	
-	return p;
+	return pack;
 }
