@@ -85,10 +85,15 @@ Reader::Reader(string file_name) {
 }
 
 
-MapConfig Reader::GetMap() {
-	return this->mMap;
+map<int,Provider*> Reader::getProviders(){
+	return this->mProviders;
 }
-
-vector<Ride> Reader::GetRides() {
-	return this->mRides;
+map<int,Service*> Reader::getServices(){
+	return this->mServices;
+}
+map<int,Country*> Reader::getCountries(){
+	return this->mCountries;
+}
+map<int,Project*> Reader::getProjects(){
+	return this->mProjects;
 }
