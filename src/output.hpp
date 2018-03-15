@@ -2,7 +2,6 @@
 #define output_hpp
 
 #include "dependencies.hpp"
-#include "veicolo.hpp"
 
 #include <iostream>
 #include <vector>
