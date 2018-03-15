@@ -16,7 +16,10 @@ int Package::getNum() const {
 	return this->n_u;
 }
 
-int Package::getLatenza(Country *c){
+int Package::getLatenza(Country *c) const{
 	return this->r->getLatenza(c);
 }
 
+float Package::getCost() const{
+	return this->cost;
+}

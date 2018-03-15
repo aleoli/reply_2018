@@ -12,7 +12,8 @@ namespace reply {
         
         void add_service(Service_quant s);
         int getNum() const;
-		int getLatenza(Country *c);
+		float getCost() const;
+		int getLatenza(Country *c) const;
         
     private:
         int id;
