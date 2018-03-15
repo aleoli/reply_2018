@@ -19,7 +19,7 @@ namespace reply {
 		map<int,Provider*> getProviders();
 		map<int,Service*> getServices();
 		map<int,Country*> getCountries();
-		map<int,Project*> getProjects();
+		map<unsigned int,Project*> getProjects();
 		Reader(string);
 		
   private:
@@ -30,3 +30,5 @@ namespace reply {
 	};
 	
 }
+
+#endif

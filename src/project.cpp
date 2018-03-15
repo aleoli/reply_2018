@@ -3,6 +3,10 @@ using reply::Project;
 
 #include "service.hpp"
 #include "package.hpp"
+#include "provider.hpp"
+#include "country.hpp"
+
+using reply::Package_quant;
 
 Project::Project(int id, unsigned long penalty, Country *c) {
     this->id = id;
@@ -17,16 +21,16 @@ void Project::add_service(Service_quant sq) {
 }
 
 void Project::buy_res(map<int, Provider *> *provs) {
-    this->n_provs = provs.size();
+    this->n_provs = provs->size();
     while(this->has_req) {
         Pack best;
         bool has_best = false;
-        for(auto it=provs.begin(); it!=provs.end(); ++it) {
-            Pack p = it->second->getPackage(this->c, this->sqs);
+        for(auto it=provs->begin(); it!=provs->end(); ++it) {
+            Pack p = it->second->getPackage(*(this->c), this->sqs);
             if(!has_best) {
                 has_best = true;
                 best = p;
-            } else if(p.lat*p.cost < best.lat*.best.cost) {
+            } else if(p.lat*p.cost < best.lat*best.cost) {
                 best = p;
             }
         }
@@ -47,8 +51,9 @@ void Project::scale_res(Package *p) {
     map<int, Service_quant> ss = p->getServ();
     bool finish = true;
     for(auto it=ss.begin(); it!=ss.end(); ++it) {
-        this->sqs[it->second->s->getId()] -= it->second->q;
-        if(this->sqs[it->second->s->getId()] > 0) {
+        int tmp = this->sqs[it->second.s->getId()].q - it->second.q;
+        this->sqs[it->second.s->getId()].q = tmp;
+        if(this->sqs[it->second.s->getId()].q > 0) {
             finish = false;
         }
     }

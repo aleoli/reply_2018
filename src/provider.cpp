@@ -4,6 +4,8 @@ using reply::Provider;
 #include "region.hpp"
 #include "package.hpp"
 
+using reply::Pack;
+
 Provider::Provider(int id, string name){
 	this->id = id;
 	this->name = name;

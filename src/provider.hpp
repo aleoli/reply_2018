@@ -12,7 +12,7 @@ namespace reply {
 			void addRegion(Region*);
 			void addNumRegion(int);
 			~Provider();
-			Pack getPackage(Country, map<int, Service_quant>);
+			Pack getPackage(Country*, map<int, Service_quant>);
 		
 		private:
 			int id;

@@ -1,6 +1,11 @@
 #include "package.hpp"
 using reply::Package;
 
+#include "service.hpp"
+#include "region.hpp"
+
+using reply::Service_quant;
+
 Package::Package(int id, int n_u, float cost, Region *r) {
     this->id = id;
     this->n_u = n_u;
