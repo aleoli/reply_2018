@@ -34,7 +34,15 @@ void Project::buy_res(map<int, Provider *> *provs) {
 }
 
 void Project::scale_res(Package *p) {
-    this->bought.push_back(p);
+    auto it = this->bought.find(p->getId());
+    if(it!=this->bought.end()) {
+        Package_quant pq;
+        pq.p = p;
+        pq.q = 1;
+        this->bought[p->getId()] = pq;
+    } else {
+        this->bought[p->getId()].q++;
+    }
     map<int, Service_quant> ss = p->getServ();
     bool finish = true;
     for(auto it=ss.begin(); it!=ss.end(); ++it) {
@@ -48,13 +56,10 @@ void Project::scale_res(Package *p) {
     }
 }
 
-int **Project::getBought(int *w, int *h) {
-    h = this->n_provs;
-    w = this->ss.size();
-    int **m = malloc();
-    for(int a=0; a<h; a++) {
-        for(int b=0; b<w; b++) {
-            
-        }
+vector<Package_quant> Project::getBought(int *w, int *h) {
+    vector<Package_quant> res;
+    for(auto it=this->bought.begin(); it!=this->bought.end(); ++it) {
+        res.push_back(it->second);
     }
+    return res;
 }
