@@ -1,6 +1,8 @@
 #include "project.hpp"
 using reply::Project;
 
+#include <exception>
+
 #include "service.hpp"
 #include "package.hpp"
 #include "provider.hpp"
@@ -26,21 +28,28 @@ void Project::buy_res(map<int, Provider *> *provs) {
         Pack best;
         bool has_best = false;
         for(auto it=provs->begin(); it!=provs->end(); ++it) {
-            Pack p = it->second->getPackage(*(this->c), this->sqs);
-            if(!has_best) {
-                has_best = true;
-                best = p;
-            } else if(p.lat*p.cost < best.lat*best.cost) {
-                best = p;
+            try {
+                Pack p = it->second->getPackage(this->c, this->sqs);
+                if(!has_best) {
+                    has_best = true;
+                    best = p;
+                } else if(p.lat*p.cost < best.lat*best.cost) {
+                    best = p;
+                }
+            } catch(std::exception &e) {
+                
             }
         }
-        this->scale_res(best.p);
+        if(has_best)
+            this->scale_res(best.p);
+        else
+            break;
     }
 }
 
 void Project::scale_res(Package *p) {
-    auto it = this->bought.find(p->getId());
-    if(it!=this->bought.end()) {
+    p->scale();
+    if(this->bought.size()==0 || this->bought.find(p->getId())==this->bought.end()) {
         Package_quant pq;
         pq.p = p;
         pq.q = 1;
@@ -50,10 +59,11 @@ void Project::scale_res(Package *p) {
     }
     map<int, Service_quant> ss = p->getServ();
     bool finish = true;
-    for(auto it=ss.begin(); it!=ss.end(); ++it) {
-        int tmp = this->sqs[it->second.s->getId()].q - it->second.q;
-        this->sqs[it->second.s->getId()].q = tmp;
-        if(this->sqs[it->second.s->getId()].q > 0) {
+    for(auto it=this->sqs.begin(); it!=this->sqs.end(); ++it) {
+        int q = ss[it->first].q;
+        int new_v = it->second.q - q;
+        this->sqs[it->first].q = new_v;
+        if(new_v > 0) {
             finish = false;
         }
     }
@@ -68,4 +78,8 @@ vector<Package_quant> Project::getBought() {
         res.push_back(it->second);
     }
     return res;
+}
+
+int Project::getId() const {
+    return this->id;
 }

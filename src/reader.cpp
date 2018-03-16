@@ -2,8 +2,19 @@
 using reply::Reader;
 
 #include <fstream>
-
 using std::ifstream;
+
+#include "service.hpp"
+#include "country.hpp"
+#include "provider.hpp"
+#include "region.hpp"
+#include "package.hpp"
+#include "project.hpp"
+
+using reply::Provider;
+using reply::Service;
+using reply::Country;
+using reply::Project;
 
 Reader::Reader(string file_name) {
 	
@@ -15,65 +26,60 @@ Reader::Reader(string file_name) {
     int nProj;
 	f >> nProv >> nSer >> nCou >> nProj;
     
-/*		Ride r;
-	r.id = id;
-	if(!(f >> r.start.x >> r.start.y >> r.end.x >> r.end.y >> r.st_t >> r.end_t)) {
-		break;
-	}
-	cout << r.start.x << " " << r.start.y << " " << r.end.x << " " << r.end.y << " " << r.st_t << " " << r.end_t << endl;
-	this->mRides.push_back(r);
-	id++;*/
 	string tmp;
 	int tmp1;
 	
 	for(int count=0; count<nSer; count++){
 		f >> tmp;
-		mServices[count]=new Service(count,tmp);
+		this->mServices[count] = new Service(count,tmp);
 	}
 	
 	for(int count=0; count<nCou; count++){
 		f >> tmp;
-		mCountries[count]=new Country(count,tmp);
+        Country *c = new Country(count,tmp);
+        this->mCountries[count] = c;
+        this->str_country[tmp] = c;
 	}
 	
 	for(int count=0; count<nProv; count++){
 		f >> tmp >> tmp1;
-		mProviders[count]=new Provider(count,tmp);
-		for(int count1=0; count1<tmp1; count1++){
+        Provider *prov = new Provider(count, tmp);
+		for(int count1=0; count1<tmp1; count1++) {
 			string nomereg;
 			int available;
 			float package_unit_cost;
 			f >> nomereg;
 			f >> available >> package_unit_cost;                 
-			Region* reg=new Region(count1,nomereg);
-			Package* p= new Package(count1,available,package_unit_cost, reg);
-			for(int count3; count3<nSer; count3++){
+			Region* reg = new Region(count1, nomereg);
+			Package* p = new Package(count1, available, package_unit_cost, reg, prov);
+			for(int count3=0; count3<nSer; count3++) {
 				Service_quant sq;
 				int q;
-				sq.s= mServices[count3];
+				sq.s = this->mServices[count3];
 				f >> q;
-				sq.q= q;
+				sq.q = q;
 				p->add_service(sq);
 			}
 			reg->add_package(p);
-			for(int count2; count2<nCou; count2++){
+			for(int count2=0; count2<nCou; count2++) {
 				int latency;
 				Country_latency cl;
-				cl.c=mCountries[count2];
+				cl.c = this->mCountries[count2];
 				f >> latency;
-				cl.latency=latency;
+				cl.latency = latency;
 				reg->add_country(cl);
 			}
-			mProviders[count]->addRegion(reg);
+			prov->addRegion(reg);
 		}
+        this->mProviders[count] = prov;
 	}
 	
-	for(int i=0;i<nProj;i++){
+	for(int i=0; i<nProj; i++) {
 		unsigned long penalty;
 		string ncountry;
 		f >> penalty >> ncountry;
-		Project* p=new Project(i,penalty,mCountries[ncountry]);
-		for(j=0;j<nSer;j++){
+		Project* p = new Project(i, penalty, this->str_country[ncountry]);
+		for(int j=0; j<nSer; j++) {
 			Service_quant sq;
 			int q;
 			sq.s= mServices[j];
@@ -81,19 +87,24 @@ Reader::Reader(string file_name) {
 			sq.q= q;
 			p->add_service(sq);
 		}
+        this->mProjects[penalty] = p;
 	}
+    
+    f.close();
 }
 
-
-map<int,Provider*> Reader::getProviders(){
+map<int, Provider*> Reader::getProviders() {
 	return this->mProviders;
 }
-map<int,Service*> Reader::getServices(){
+
+map<int,Service*> Reader::getServices() {
 	return this->mServices;
 }
-map<int,Country*> Reader::getCountries(){
+
+map<int,Country*> Reader::getCountries() {
 	return this->mCountries;
 }
-map<int,Project*> Reader::getProjects(){
+
+map<unsigned long, Project *> Reader::getProjects() {
 	return this->mProjects;
 }

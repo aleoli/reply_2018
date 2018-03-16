@@ -1,6 +1,11 @@
 #include "region.hpp"
 using reply::Region;
 
+#include "country.hpp"
+#include "package.hpp"
+
+using reply::Package;
+
 Region::Region(int id, string name) {
     this->id = id;
     this->name = name;
@@ -26,6 +31,8 @@ int Region::getLatenza(Country *c){
 	Country_latency cl;
 	for(auto it=this->cls.begin(); it!=this->cls.end();++it){
 		cl = it->second;
-		if(cl.c == c) return cl.latency;
+		if(cl.c == c)
+            return cl.latency;
 	}
+    return 0;
 }

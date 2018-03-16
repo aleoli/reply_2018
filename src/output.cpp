@@ -1,17 +1,28 @@
 #include "output.hpp"
-
 using reply::Output;
 
-Output::Output(map<unsigned int,Project*> mProjects){
+#include "project.hpp"
+#include "region.hpp"
+#include "provider.hpp"
+#include "package.hpp"
+
+using reply::Project;
+
+#include <fstream>
+using std::ofstream;
+
+Output::Output(map<unsigned long, Project*> mProjects, string file_name) {
     
-    FILE* f;
-    f=fopen("output.txt","w");
+    ofstream f;
+    f.open(file_name, ofstream::out);
     
-    for(int i=0;i<mProjects.size();i++) {
-        for(int j=0;j<mProjects[i]->getBought().size();j++){
-            vector<Package_quant> tmp=mProjects[i]->getBought();
-            fprintf(f,"%d ",tmp[j].q);
+    for(auto it=mProjects.begin(); it!=mProjects.end(); ++it) {
+        vector<Package_quant> tmp = it->second->getBought();
+        for(auto it2=tmp.begin(); it2!=tmp.end(); ++it2) {
+            f << it2->p->getProv()->getId() << " " << it2->p->getRegion()->getId() << " " << it2->q << " ";
         }
+        f << endl;
     }
-    fclose(f);
+    
+    f.close();
 }

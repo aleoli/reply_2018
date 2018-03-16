@@ -16,17 +16,18 @@ namespace reply {
 	class Reader {
 	
 	public:
-		map<int,Provider*> getProviders();
-		map<int,Service*> getServices();
-		map<int,Country*> getCountries();
-		map<unsigned int,Project*> getProjects();
-		Reader(string);
+        Reader(string);
+		map<int, Provider *> getProviders();
+		map<int, Service *> getServices();
+		map<int, Country *> getCountries();
+		map<unsigned long, Project *> getProjects();
 		
   private:
-		map<int,Project*> mProjects;
-		map<int,Service*> mServices;
-		map<int,Country*> mCountries;
-		map<int,Provider*> mProviders;    
+		map<unsigned long, Project *> mProjects;
+		map<int, Service *> mServices;
+		map<int, Country *> mCountries;
+        map<string, Country *> str_country;
+		map<int, Provider *> mProviders;
 	};
 	
 }

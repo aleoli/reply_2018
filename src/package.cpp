@@ -3,14 +3,30 @@ using reply::Package;
 
 #include "service.hpp"
 #include "region.hpp"
+#include "provider.hpp"
 
 using reply::Service_quant;
+using reply::Provider;
+using reply::Region;
 
-Package::Package(int id, int n_u, float cost, Region *r) {
+Package::Package(int id, int n_u, float cost, Region *r, Provider *p) {
     this->id = id;
     this->n_u = n_u;
     this->cost = cost;
 	this->r = r;
+    this->p = p;
+}
+
+Region *Package::getRegion() const {
+    return this->r;
+}
+
+Provider *Package::getProv() const {
+    return this->p;
+}
+
+void Package::scale() {
+    this->n_u--;
 }
 
 void Package::add_service(Service_quant s) {
@@ -34,7 +50,7 @@ map<int, Service_quant> Package::getServ() const {
     return this->ss;
 }
 
-int Package::getId(){
+int Package::getId() const {
 	return this->id;
 }
 
