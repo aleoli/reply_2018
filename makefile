@@ -5,7 +5,7 @@ CC = g++
 PROGRAM_NAME = reply
 
 build: $(OBJECTS)
-	$(CC) -Wall -std=c++11 -o bin/$(PROGRAM_NAME) $(OBJECTS)
+	$(CC) -Wall -std=c++11 -o bin/$(PROGRAM_NAME) $(OBJECTS) -pthread
 
 bin/%.o: src/%.cpp
 	$(CC) -Wall -std=c++11 -c -o bin/$*.o src/$*.cpp
