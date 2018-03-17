@@ -26,7 +26,9 @@ Provider *Package::getProv() const {
 }
 
 void Package::scale() {
+    this->lock.lock();
     this->n_u--;
+    this->lock.unlock();
 }
 
 void Package::add_service(Service_quant s) {

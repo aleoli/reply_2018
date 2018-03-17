@@ -3,6 +3,8 @@
 
 #include "dependencies.hpp"
 
+#include "lock.hpp"
+
 namespace reply {
     
     class Package {
@@ -24,6 +26,7 @@ namespace reply {
         static bool compare(const Package_country first, const Package_country second);
         
     private:
+        Lock lock;
         int id;
         int n_u;
         float cost;

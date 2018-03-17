@@ -1,12 +1,22 @@
 #include <iostream>
 #include <list>
+#include <thread>
+
+#define __n_threads__ 8
 
 using std::cout;
 using std::endl;
 using std::list;
+using std::thread;
 
 #include "reply.hpp"
 using namespace reply;
+
+Lock lock;
+std::reverse_iterator<std::__list_iterator<reply::Project *, void *> > it;
+int n=0;
+
+void thread_f(list<Project *> projects, list<Package *> packages);
 
 int main(int argc, char *argv[]) {
     if(argc != 3) {
@@ -21,14 +31,35 @@ int main(int argc, char *argv[]) {
     list<Project *> projects = r.getProjects();
     cout << "3)" << endl;
     
-    for(auto it=projects.rbegin(); it!=projects.rend(); ++it) {
-        cout << (*it)->getId() << endl;
-        (*it)->buy_res(&packages);
+    it = projects.rbegin();
+    thread threads[__n_threads__];
+    for(int a=0; a<__n_threads__; a++) {
+        threads[a] = thread(thread_f, projects, packages);
     }
+    for(int a=0; a<__n_threads__; a++) {
+        threads[a].join();
+    }
+    
     cout << "4)" << endl;
     
     Output o(projects, string(argv[2]));
     cout << "5)" << endl;
     
     return 0;
+}
+
+void thread_f(list<Project *> projects, list<Package *> packages) {
+    while(true) {
+        lock.lock();
+        if(n>=projects.size()) {
+            lock.unlock();
+            return;
+        }
+        Project *p = *it;
+        ++it;
+        n++;
+        lock.unlock();
+        cout << p->getId() << endl;
+        p->buy_res(&packages);
+    }
 }

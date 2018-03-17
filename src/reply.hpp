@@ -12,4 +12,6 @@
 #include "reader.hpp"
 #include "output.hpp"
 
+#include "lock.hpp"
+
 #endif

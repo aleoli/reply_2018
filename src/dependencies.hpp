@@ -24,6 +24,8 @@ namespace reply {
     class Package;
     class Output;
     
+    class Lock;
+    
     typedef struct {
         Country *c;
         int latency;
