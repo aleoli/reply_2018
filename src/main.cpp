@@ -13,7 +13,7 @@ using std::thread;
 using namespace reply;
 
 Lock lock;
-std::reverse_iterator<std::__list_iterator<reply::Project *, void *> > it;
+list<Project *>::reverse_iterator it;
 int n=0;
 
 void thread_f(list<Project *> projects, list<Package *> packages);
@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
 void thread_f(list<Project *> projects, list<Package *> packages) {
     while(true) {
         lock.lock();
-        if(n>=projects.size()) {
+        if(n>=(int)projects.size()) {
             lock.unlock();
             return;
         }
