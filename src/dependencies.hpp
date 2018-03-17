@@ -50,6 +50,7 @@ namespace reply {
     typedef struct {
         Package *p;
         Country *c;
+        bool use;
     } Package_country;
     
 }

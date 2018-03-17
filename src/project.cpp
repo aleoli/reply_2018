@@ -28,6 +28,7 @@ void Project::buy_res(list<Package *> *packages) {
         Package_country pc;
         pc.p = *it;
         pc.c = this->c;
+        pc.use = true;
         tmp.push_back(pc);
     }
     tmp.sort(Package::compare);
@@ -47,9 +48,11 @@ bool Project::find_best(list<Package_country> *tmp, Pack *best) {
     }
     Package *p = nullptr;
     for(auto it=tmp->begin(); it!=tmp->end(); ++it) {
-        if(this->has_res(it->p)) {
+        if(it->use && this->has_res(it->p)) {
             p = it->p;
             break;
+        } else {
+            it->use = false;
         }
     }
     if(p==nullptr) {
