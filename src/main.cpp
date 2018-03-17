@@ -1,8 +1,12 @@
 #include <iostream>
 #include <list>
+#include <chrono>
 #include <thread>
+#include <ctime>
 
 #define __n_threads__ 8
+
+using namespace std::chrono;
 
 using std::cout;
 using std::endl;
@@ -23,6 +27,8 @@ int main(int argc, char *argv[]) {
         cout << "Mancano argomenti" << endl;
         exit(1);
     }
+    
+    auto started = high_resolution_clock::now();
     
     Reader r((string(argv[1])));
     cout << "1)" << endl;
@@ -45,6 +51,9 @@ int main(int argc, char *argv[]) {
     Output o(projects, string(argv[2]));
     cout << "5)" << endl;
     
+    auto done = high_resolution_clock::now();
+    cout << "Time: " << duration_cast<milliseconds>(done-started).count() << " ms" << endl;
+    
     return 0;
 }
 
@@ -59,7 +68,7 @@ void thread_f(list<Project *> projects, list<Package *> packages) {
         ++it;
         n++;
         lock.unlock();
-        cout << p->getId() << endl;
+        //cout << p->getId() << endl;
         p->buy_res(&packages);
     }
 }

@@ -23,9 +23,17 @@ void Project::add_service(Service_quant sq) {
 }
 
 void Project::buy_res(list<Package *> *packages) {
+    list<Package_country> tmp;
+    for(auto it=packages->begin(); it!=packages->end(); ++it) {
+        Package_country pc;
+        pc.p = *it;
+        pc.c = this->c;
+        tmp.push_back(pc);
+    }
+    tmp.sort(Package::compare);
     Pack best;
     while(this->has_req) {
-        if(this->find_best(packages, &best)) {
+        if(this->find_best(&tmp, &best)) {
             this->scale_res(best.p);
         } else {
             break;
@@ -33,21 +41,20 @@ void Project::buy_res(list<Package *> *packages) {
     }
 }
 
-bool Project::find_best(list<Package *> *packages, Pack *best) {
-    list<Package_country> tmp;
-    for(auto it=packages->begin(); it!=packages->end(); ++it) {
-        if(this->has_res(*it)) {
-            Package_country pc;
-            pc.p = *it;
-            pc.c = this->c;
-            tmp.push_back(pc);
-        }
-    }
-    if(tmp.size() == 0) {
+bool Project::find_best(list<Package_country> *tmp, Pack *best) {
+    if(tmp->size() == 0) {
         return false;
     }
-    tmp.sort(Package::compare);
-    Package *p = tmp.front().p;
+    Package *p = nullptr;
+    for(auto it=tmp->begin(); it!=tmp->end(); ++it) {
+        if(this->has_res(it->p)) {
+            p = it->p;
+            break;
+        }
+    }
+    if(p==nullptr) {
+        return false;
+    }
     best->p = p;
     best->lat = p->getLatenza(this->c);
     best->cost = p->getCost();

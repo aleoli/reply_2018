@@ -20,7 +20,7 @@ namespace reply {
         
     private:
         void scale_res(Package *p);
-        bool find_best(list<Package *> *packages, Pack *best);
+        bool find_best(list<Package_country> *tmp, Pack *best);
         bool has_res(Package *p);
         
         int id;
