@@ -4,12 +4,14 @@
 #include <iostream>
 #include <vector>
 #include <map>
+#include <list>
 
 using std::vector;
 using std::string;
 using std::cout;
 using std::endl;
 using std::map;
+using std::list;
 
 namespace reply {
     
@@ -42,6 +44,11 @@ namespace reply {
         Package *p;
         int q;
     } Package_quant;
+    
+    typedef struct {
+        Package *p;
+        Country *c;
+    } Package_country;
     
 }
 

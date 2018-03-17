@@ -15,6 +15,7 @@ using reply::Provider;
 using reply::Service;
 using reply::Country;
 using reply::Project;
+using reply::Package;
 
 Reader::Reader(string file_name) {
 	
@@ -70,6 +71,7 @@ Reader::Reader(string file_name) {
 				reg->add_country(cl);
 			}
 			prov->addRegion(reg);
+            this->packages.push_back(p);
 		}
         this->mProviders[count] = prov;
 	}
@@ -87,24 +89,21 @@ Reader::Reader(string file_name) {
 			sq.q= q;
 			p->add_service(sq);
 		}
-        this->mProjects[penalty] = p;
+        this->projects.push_back(p);
 	}
     
     f.close();
+}
+
+list<Package *> Reader::getPackages() {
+    return this->packages;
 }
 
 map<int, Provider*> Reader::getProviders() {
 	return this->mProviders;
 }
 
-map<int,Service*> Reader::getServices() {
-	return this->mServices;
-}
-
-map<int,Country*> Reader::getCountries() {
-	return this->mCountries;
-}
-
-map<unsigned long, Project *> Reader::getProjects() {
-	return this->mProjects;
+list<Project *> Reader::getProjects() {
+    this->projects.sort(Project::compare);
+	return this->projects;
 }

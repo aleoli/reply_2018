@@ -22,29 +22,49 @@ void Project::add_service(Service_quant sq) {
     this->has_req = true;
 }
 
-void Project::buy_res(map<int, Provider *> *provs) {
-    this->n_provs = provs->size();
+void Project::buy_res(list<Package *> *packages) {
+    Pack best;
     while(this->has_req) {
-        Pack best;
-        bool has_best = false;
-        for(auto it=provs->begin(); it!=provs->end(); ++it) {
-            try {
-                Pack p = it->second->getPackage(this->c, this->sqs);
-                if(!has_best) {
-                    has_best = true;
-                    best = p;
-                } else if(p.lat*p.cost < best.lat*best.cost) {
-                    best = p;
-                }
-            } catch(std::exception &e) {
-                
-            }
-        }
-        if(has_best)
+        if(this->find_best(packages, &best)) {
             this->scale_res(best.p);
-        else
+        } else {
             break;
+        }
     }
+}
+
+bool Project::find_best(list<Package *> *packages, Pack *best) {
+    list<Package_country> tmp;
+    for(auto it=packages->begin(); it!=packages->end(); ++it) {
+        if(this->has_res(*it)) {
+            Package_country pc;
+            pc.p = *it;
+            pc.c = this->c;
+            tmp.push_back(pc);
+        }
+    }
+    if(tmp.size() == 0) {
+        return false;
+    }
+    tmp.sort(Package::compare);
+    Package *p = tmp.front().p;
+    best->p = p;
+    best->lat = p->getLatenza(this->c);
+    best->cost = p->getCost();
+    return true;
+}
+
+bool Project::has_res(Package *p) {
+    auto p_serv = p->getServ();
+    for(auto it=this->sqs.begin(); it!=this->sqs.end(); ++it) {
+        if(it->second.q <= 0)
+            continue;
+        auto it2 = p_serv.find(it->second.s->getId());
+        if(it2 != p_serv.end() && it2->second.q > 0) {
+            return true;
+        }
+    }
+    return false;
 }
 
 void Project::scale_res(Package *p) {
@@ -80,6 +100,15 @@ vector<Package_quant> Project::getBought() {
     return res;
 }
 
+unsigned long Project::getPenalty() const {
+    return this->penalty;
+}
+
 int Project::getId() const {
     return this->id;
 }
+
+bool Project::compare(const Project *first, const Project *second) {
+    return first->penalty < second->penalty;
+}
+

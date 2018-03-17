@@ -1,14 +1,14 @@
 #include <iostream>
+#include <list>
 
 using std::cout;
 using std::endl;
+using std::list;
 
 #include "reply.hpp"
 using namespace reply;
 
 int main(int argc, char *argv[]) {
-    cout << "Cacca!" << endl;
-    
     if(argc != 3) {
         cout << "Mancano argomenti" << endl;
         exit(1);
@@ -16,14 +16,14 @@ int main(int argc, char *argv[]) {
     
     Reader r((string(argv[1])));
     cout << "1)" << endl;
-    map<int, Provider *> provs = r.getProviders();
+    list<Package *> packages = r.getPackages();
     cout << "2)" << endl;
-    map<unsigned long, Project *> projects = r.getProjects();
+    list<Project *> projects = r.getProjects();
     cout << "3)" << endl;
     
     for(auto it=projects.rbegin(); it!=projects.rend(); ++it) {
-        cout << it->second->getId() << endl;
-        it->second->buy_res(&provs);
+        cout << (*it)->getId() << endl;
+        (*it)->buy_res(&packages);
     }
     cout << "4)" << endl;
     

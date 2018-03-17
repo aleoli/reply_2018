@@ -16,7 +16,7 @@ namespace reply {
     class Output {
 	
         public:
-        Output(map<unsigned long, Project*> mProjects, string file_name);
+        Output(list<Project*> projects, string file_name);
     };
 	
 }

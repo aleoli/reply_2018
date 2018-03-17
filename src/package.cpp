@@ -54,3 +54,7 @@ int Package::getId() const {
 	return this->id;
 }
 
+bool Package::compare(const Package_country first, const Package_country second) {
+    return first.p->getLatenza(first.c)*first.p->getCost() < second.p->getLatenza(second.c)*second.p->getCost();
+}
+

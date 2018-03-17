@@ -21,6 +21,8 @@ namespace reply {
         Region *getRegion() const;
         Provider *getProv() const;
         
+        static bool compare(const Package_country first, const Package_country second);
+        
     private:
         int id;
         int n_u;
